@@ -6,7 +6,7 @@ import { addFeature } from 'actions';
 export class Search extends React.Component {
   render() {
     return (
-      <div className='container search-component'>
+      <div className='container search'>
         <form>
           <div className="form-group row justify-content-center">
             <div className="col">

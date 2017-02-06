@@ -3,14 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addFeature } from 'actions';
 
-import Day from 'Day';
-
-export class List extends React.Component {
+export class Toolbar extends React.Component {
   render() {
     return (
-      <div className='container list'>
-        <h3>List Component</h3>
-        <Day />
+      <div className='container toolbar'>
+        <h3>Toolbar Component</h3>
       </div>
     );
   }
@@ -26,4 +23,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ addFeature }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default connect(mapStateToProps, mapDispatchToProps)(Toolbar);

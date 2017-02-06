@@ -1,11 +1,10 @@
 import { combineReducers, applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { searchTextReducer, showCompletedReducer, todosReducer } from 'reducers';
+import { searchTextReducer, todosReducer } from 'reducers';
 
 export const configure = (initialState = {}) => {
   const reducer = combineReducers({
     searchText: searchTextReducer,
-    showCompleted: showCompletedReducer,
     todos: todosReducer
   });
 
