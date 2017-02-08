@@ -18,9 +18,6 @@ export class Groundhog extends React.Component {
           <div className='col-sm-12'>
             <Search />
           </div>
-          <div className='col hidden-md-up'>
-            <Toolbar />
-          </div>
         </div>
         <div className='row'>
           <div className='col-sm-8'>
@@ -28,6 +25,11 @@ export class Groundhog extends React.Component {
           </div>
           <div className='col-sm-4 hidden-sm-down'>
             <Sidebar />
+          </div>
+        </div>
+        <div className='row fixed-bottom'>
+          <div className='col hidden-md-up'>
+            <Toolbar />
           </div>
         </div>
       </div>

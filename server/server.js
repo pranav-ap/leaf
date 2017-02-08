@@ -33,6 +33,7 @@ app.get('*', (req, res) => {
 
 app.use(bodyParser.json());
 
+// add new todo
 app.post('/todos', authenticate, (req, res) => {
   let todo = new Todo({
     text: req.body.text,
@@ -46,6 +47,7 @@ app.post('/todos', authenticate, (req, res) => {
   });
 });
 
+// send all todos on start
 app.get('/todos', authenticate, (req, res) => {
   Todo.find({
     _creator: req.user._id
@@ -56,6 +58,7 @@ app.get('/todos', authenticate, (req, res) => {
   });
 });
 
+// send only the todo with id
 app.get('/todos/:id', authenticate, (req, res) => {
   let id = req.params.id;
 
@@ -77,6 +80,7 @@ app.get('/todos/:id', authenticate, (req, res) => {
   });
 });
 
+// delete todo with id
 app.delete('/todos/:id', authenticate, (req, res) => {
   let id = req.params.id;
 
@@ -98,6 +102,7 @@ app.delete('/todos/:id', authenticate, (req, res) => {
   });
 });
 
+// update a todo
 app.patch('/todos/:id', authenticate, (req, res) => {
   const id = req.params.id;
   const body = _.pick(req.body, ['text', 'completed']);
@@ -159,6 +164,7 @@ app.post('/users/login', (req, res) => {
   });
 });
 
+// logout
 app.delete('/users/me/token', authenticate, (req, res) => {
   req.user.removeToken(req.token).then(() => {
     res.status(200).send();
