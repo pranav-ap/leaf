@@ -25,12 +25,6 @@ app.use((req, res, next) => {
 
 app.use(express.static('./../public'));
 
-// handle every other route with index.html, which will contain
-// a script tag to your application's JavaScript file(s).
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-});
-
 app.use(bodyParser.json());
 
 // add new todo
