@@ -105,10 +105,10 @@ const signup = (user) => {
 export const startSignup = (email, password) => {
   return (dispatch, getState) => {
     console.log('1');
-    axios.post('/users', JSON.stringify({ email, password })).then((user) => {
+    axios.post('/users', { email, password }).then((user) => {
       dispatch(signup(user));
     }).catch((e) => {
-      console.log(e);
+      console.log('error', e);
     });
   };
 };

@@ -16,8 +16,8 @@ const redirectIfLoggedIn = () => {
 export default (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
-      <IndexRoute component={Start} onEnter={redirectIfLoggedIn} />
-      <Route path="home" component={Groundhog} onEnter={requireLogin} />
+      <IndexRoute component={Start} />
+      <Route path="home" component={Groundhog} />
     </Route>
   </Router>
 );
