@@ -104,9 +104,8 @@ const signup = (user) => {
 
 export const startSignup = (email, password) => {
   return (dispatch, getState) => {
-    console.log('1');
-    axios.post('/users', { email, password }).then((user) => {
-      dispatch(signup(user));
+    axios.post('localhost:3000/users', { email, password }).then((user) => {
+      dispatch(signup(user)); // no reducer setup yet
     }).catch((e) => {
       console.log('error', e);
     });
