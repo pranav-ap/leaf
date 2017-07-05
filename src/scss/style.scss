@@ -1,12 +1,5 @@
-// variables
 @import "base/variables";
-
-// Bootstrap settings
-@import "bootstrap/bootstrap";
+@import "base/layout";
 
 // Components
-@import "components/title";
-@import "components/search";
-@import "components/list";
-@import "components/sidebar";
-@import "components/toolbar";
+@import "components/start";

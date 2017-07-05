@@ -1,13 +1,6 @@
 //import moment from 'moment';
 import axios from 'axios';
 
-export const addFeature = (feature) => {
-  return {
-    type: 'NEW_FEATURE',
-    feature
-  };
-};
-
 // Search text
 export const setSearchText = (searchText) => {
   return {
@@ -25,16 +18,14 @@ const addTodo = (todo) => {
 };
 
 export const startAddTodo = (text) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const todo = {
       text
     };
 
-    return axios.post('/todos', { todo }).then(() => {
-      dispatch(addTodo({
-        ...todo
-      }));
-    }).catch((e) => {
+    return axios.post('/api/todos', { todo }).then(() => {
+      dispatch(addTodo(todo));
+    }).catch(() => {
 
     });
   };
@@ -49,10 +40,10 @@ const addTodos = (todos) => {
 };
 
 export const startAddTodos = () => {
-  return (dispatch, getState) => {
-    return axios.get('/todos').then((todos) => {
+  return (dispatch) => {
+    return axios.get('/api/todos').then((todos) => {
       dispatch(addTodos(todos));
-    }).catch((e) => {
+    }).catch(() => {
 
     });
   };
@@ -66,29 +57,30 @@ const deleteTodo = (todo) => {
   };
 };
 
-export const StartDeleteTodo = (id) => {
-  return (dispatch, getState) => {
-    return axios.delete(`/todos/:${id}`).then((todo) => {
+export const startDeleteTodo = (id) => {
+  return (dispatch) => {
+    return axios.delete(`/api/todos/:${id}`).then((todo) => {
       dispatch(deleteTodo(todo));
-    }).catch((e) => {
+    }).catch(() => {
 
     });
   };
 };
 
 // update a todo with id
-const updateTodo = (todo) => {
+const updateTodo = (id, todo) => {
   return {
     type: 'UPDATE_TODO',
+    id,
     todo
   };
 };
 
-export const startUpdateTodo = () => {
-  return (dispatch, getState) => {
-    return axios.patch('/todos/:id').then((todo) => {
-      dispatch(updateTodo(todo));
-    }).catch((e) => {
+export const startUpdateTodo = (id, todo) => {
+  return (dispatch) => {
+    return axios.patch(`/api/todos/:${id}`, { todo }).then(() => {
+      dispatch(updateTodo(id, todo));
+    }).catch(() => {
 
     });
   };
@@ -97,17 +89,17 @@ export const startUpdateTodo = () => {
 // sign up
 const signup = (user) => {
   return {
-    type: 'SIGN_UP',
+    type: 'SIGNUP',
     user
   };
 };
 
 export const startSignup = (email, password) => {
-  return (dispatch, getState) => {
-    axios.post('localhost:3000/users', { email, password }).then((user) => {
-      dispatch(signup(user)); // no reducer setup yet
-    }).catch((e) => {
-      console.log('error', e);
+  return (dispatch) => {
+    axios.post('/api/users', { email, password }).then((user) => { // user contains _id and email
+      dispatch(signup(user));
+    }).catch(() => {
+
     });
   };
 };
@@ -115,32 +107,31 @@ export const startSignup = (email, password) => {
 // login
 const login = (user) => {
   return {
-    type: 'LOG_IN',
+    type: 'LOGIN',
     user
   };
 };
 
 export const startLogin = (email, password) => {
-  return (dispatch, getState) => {
-    return axios.post('/users/login', { email, password }).then((user) => {
+  return (dispatch) => {
+    return axios.post('/api/users/login', { email, password }).then((user) => {
       dispatch(login(user));
-    }).catch((e) => {
+    }).catch(() => {
 
     });
   };
 };
 
 // logout
-const logout = (user) => {
+const logout = () => {
   return {
-    type: 'LOG_OUT',
-    user
+    type: 'LOGOUT'
   };
 };
 
 export const startLogout = () => {
-  return (dispatch, getState) => {
-    return axios.delete('/users/me/token').then(() => {
+  return (dispatch) => {
+    return axios.delete('/api/users/me/token').then(() => {
       dispatch(logout());
     }).catch(() => {
 

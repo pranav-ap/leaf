@@ -33,18 +33,20 @@ const UserSchema = new mongoose.Schema({
   }]
 });
 
-UserSchema.methods.toJSON = function () {
-  let user = this;
-  let userObject = user.toObject();
+// gets called when we respond with res.send. JSON.stringify is what calls toJSON. 
+UserSchema.methods.toJSON = () => {
+  const user = this;
+  const userObject = user.toObject();
 
   return _.pick(userObject, ['_id', 'email']);
 };
 
-// instance method - get called with individual document
-UserSchema.methods.generateAuthToken = function () {
-  let user = this;
-  let access = 'auth';
-  let token = jwt.sign({ _id: user._id.toHexString(), access }, process.env.JWT_SECRET).toString();
+// methods are defined on the document (instance)
+UserSchema.methods.generateAuthToken = () => {
+  const user = this; // 'this' refers to document
+  const access = 'auth';
+  // sign( data to sign, secret)
+  const token = jwt.sign({ _id: user._id.toHexString(), access }, process.env.JWT_SECRET).toString();
 
   user.tokens.push({ access, token });
 
@@ -53,8 +55,8 @@ UserSchema.methods.generateAuthToken = function () {
   });
 };
 
-UserSchema.methods.removeToken = function (token) {
-  let user = this;
+UserSchema.methods.removeToken = (token) => {
+  const user = this;
 
   return user.update({
     $pull: {
@@ -63,9 +65,9 @@ UserSchema.methods.removeToken = function (token) {
   });
 };
 
-// model method
-UserSchema.statics.findbyToken = function (token) {
-  let User = this;
+// statics are the methods defined on the Model.
+UserSchema.statics.findbyToken = (token) => {
+  const User = this;
   let decoded;
 
   try {
@@ -80,8 +82,8 @@ UserSchema.statics.findbyToken = function (token) {
   });
 };
 
-UserSchema.statics.findByCredentials = function (email, password) {
-  let User = this;
+UserSchema.statics.findByCredentials = (email, password) => {
+  const User = this;
 
   return User.findOne({ email }).then((user) => {
     if (!user) {
@@ -100,8 +102,8 @@ UserSchema.statics.findByCredentials = function (email, password) {
   });
 };
 
-UserSchema.pre('save', function(next) {
-  let user = this;
+UserSchema.pre('save', (next) => {
+  const user = this;
 
   if (user.isModified('password')) {
     bcrypt.genSalt(10, (err, salt) => {

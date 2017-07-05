@@ -1,5 +1,54 @@
-.start {
-  padding: $search-padding;
-  margin: $search-margin;
-  font-family: $font-family;
+#start {
+  width: $hundred-percent;
+  margin: 0px;
+
+  #header {
+    width: $hundred-percent;
+    margin: 30px 0px;
+    text-align: center;
+
+    font-family: $font-family;
+    font-size: $header-font-size;
+
+    p {
+      margin: 0px;
+      padding: 0px;
+    }
+  }
+
+  #form {
+    width: $hundred-percent;
+    margin: 0px;
+    padding: 0px 20px;
+
+    input {
+      font-family: $font-family;
+      width: $hundred-percent;
+      height: 40px;
+      font-size: 20px;
+
+      padding: 10px;
+      margin: 10px 0px 0px;
+
+      border: 2px;
+      border-color: rgb(48, 123, 228);
+      outline: none;
+    }
+
+    button {
+      background-color: white;
+      color: $color;
+      border-color: rgb(48, 123, 228);
+
+      font-family: $font-family;
+      width: 50%;
+      height: 40px;
+
+      margin: 10px 0px 0px;
+      height: $login-button;
+
+      border: 0px;
+      outline: none;
+    }
+  }
 }

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, Router, hashHistory, IndexRoute } from 'react-router';
 
-import Main from 'Main';
-import Groundhog from 'Groundhog';
+import Container from 'Container';
+import Home from 'Home';
 import Start from 'Start';
 
 export default (
   <Router history={hashHistory}>
-    <Route path="/" component={Main}>
+    <Route path="/" component={Container}>
       <IndexRoute component={Start} />
-      <Route path="home" component={Groundhog} />
+      <Route path="home" component={Home} />
     </Route>
   </Router>
 );

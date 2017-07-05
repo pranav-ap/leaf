@@ -14,11 +14,11 @@ const { authenticate } = require('./middleware/authenticate');
 const app = express();
 const port = process.env.PORT;
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
 
 // change https to http req.headers[] doesn't exist locally
 app.use((req, res, next) => {
@@ -29,13 +29,13 @@ app.use((req, res, next) => {
   }
 });
 
-app.use(express.static('./../public'));
+app.use(express.static('./public'));
 
 app.use(bodyParser.json());
 
 // add new todo
-app.post('/todos', authenticate, (req, res) => {
-  let todo = new Todo({
+app.post('/api/todos', authenticate, (req, res) => {
+  const todo = new Todo({
     text: req.body.text,
     _creator: req.user._id
   });
@@ -48,7 +48,7 @@ app.post('/todos', authenticate, (req, res) => {
 });
 
 // send all todos on start
-app.get('/todos', authenticate, (req, res) => {
+app.get('/api/todos', authenticate, (req, res) => {
   Todo.find({
     _creator: req.user._id
   }).then((todos) => {
@@ -59,8 +59,8 @@ app.get('/todos', authenticate, (req, res) => {
 });
 
 // send only the todo with id
-app.get('/todos/:id', authenticate, (req, res) => {
-  let id = req.params.id;
+app.get('/api/todos/:id', authenticate, (req, res) => {
+  const id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
     return res.status(404).send();
@@ -75,14 +75,14 @@ app.get('/todos/:id', authenticate, (req, res) => {
     }
 
     res.send({ todo });
-  }).catch((e) => {
+  }).catch(() => {
     res.status(400).send();
   });
 });
 
 // delete todo with id
-app.delete('/todos/:id', authenticate, (req, res) => {
-  let id = req.params.id;
+app.delete('/api/todos/:id', authenticate, (req, res) => {
+  const id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
     return res.status(404).send();
@@ -97,13 +97,13 @@ app.delete('/todos/:id', authenticate, (req, res) => {
     }
 
     res.send({ todo });
-  }).catch((e) => {
+  }).catch(() => {
     res.status(400).send();
   });
 });
 
 // update a todo
-app.patch('/todos/:id', authenticate, (req, res) => {
+app.patch('/api/todos/:id', authenticate, (req, res) => {
   const id = req.params.id;
   const body = _.pick(req.body, ['text', 'completed']);
 
@@ -126,49 +126,50 @@ app.patch('/todos/:id', authenticate, (req, res) => {
       return res.status(404).send();
     }
 
-    res.send({ todo });
-  }).catch((e) => {
+    res.status(200).send({ todo });
+  }).catch(() => {
     res.status(400).send();
   });
 });
 
 // Sign up
-app.post('/users', (req, res) => {
+app.post('/api/users', (req, res) => {
   const body = _.pick(req.body, ['email', 'password']);
   const user = new User(body);
 
   user.save().then(() => {
     return user.generateAuthToken();
   }).then((token) => {
+    // header(key, value) x- means custom header
     res.header('x-auth', token).send(user);
-  }).catch((e) => {
-    res.status(400).send(e);
+  }).catch(() => {
+    res.status(400).send();
   });
 });
 
 // to authenticate user
-app.get('/users/me', authenticate, (req, res) => {
+app.get('/api/users/me', authenticate, (req, res) => {
   res.send(req.user);
 });
 
 // login
-app.post('/users/login', (req, res) => {
-  let body = _.pick(req.body, ['email', 'password']);
+app.post('/api/users/login', (req, res) => {
+  const body = _.pick(req.body, ['email', 'password']);
 
   User.findByCredentials(body.email, body.password).then((user) => {
     return user.generateAuthToken().then((token) => {
       res.header('x-auth', token).send(user);
     });
-  }).catch((e) => {
+  }).catch(() => {
     res.status(400).send();
   });
 });
 
 // logout
-app.delete('/users/me/token', authenticate, (req, res) => {
+app.delete('/api/users/me/token', authenticate, (req, res) => {
   req.user.removeToken(req.token).then(() => {
     res.status(200).send();
-  }, () => {
+  }).catch(() => {
     res.status(400).send();
   });
 });
