@@ -29,8 +29,7 @@ app.use((req, res, next) => {
   }
 });
 
-app.use(express.static('./public'));
-
+app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(bodyParser.json());
 
 // add new todo
@@ -41,9 +40,9 @@ app.post('/api/todos', authenticate, (req, res) => {
   });
 
   todo.save().then((doc) => {
-    res.send(doc);
-  }, (e) => {
-    res.status(400).send(e);
+    res.status(200).send(doc);
+  }, () => {
+    res.status(400).send();
   });
 });
 
@@ -52,9 +51,9 @@ app.get('/api/todos', authenticate, (req, res) => {
   Todo.find({
     _creator: req.user._id
   }).then((todos) => {
-    res.send({ todos });
-  }, (e) => {
-    res.status(400).send(e);
+    res.status(200).send({ todos });
+  }, () => {
+    res.status(400).send();
   });
 });
 
@@ -74,7 +73,7 @@ app.get('/api/todos/:id', authenticate, (req, res) => {
       return res.status(404).send();
     }
 
-    res.send({ todo });
+    res.status(200).send({ todo });
   }).catch(() => {
     res.status(400).send();
   });
@@ -96,7 +95,7 @@ app.delete('/api/todos/:id', authenticate, (req, res) => {
       return res.status(404).send();
     }
 
-    res.send({ todo });
+    res.status(200).send({ todo });
   }).catch(() => {
     res.status(400).send();
   });
@@ -134,22 +133,27 @@ app.patch('/api/todos/:id', authenticate, (req, res) => {
 
 // Sign up
 app.post('/api/users', (req, res) => {
+  console.log('inside signup');
   const body = _.pick(req.body, ['email', 'password']);
   const user = new User(body);
+  console.log(user);
 
   user.save().then(() => {
+    console.log('1');
     return user.generateAuthToken();
   }).then((token) => {
+    console.log('2');
     // header(key, value) x- means custom header
-    res.header('x-auth', token).send(user);
+    res.header('x-auth', token).status(200).send(user);
   }).catch(() => {
+    console.log('3');
     res.status(400).send();
   });
 });
 
 // to authenticate user
 app.get('/api/users/me', authenticate, (req, res) => {
-  res.send(req.user);
+  res.status(200).send(req.user);
 });
 
 // login
@@ -158,7 +162,7 @@ app.post('/api/users/login', (req, res) => {
 
   User.findByCredentials(body.email, body.password).then((user) => {
     return user.generateAuthToken().then((token) => {
-      res.header('x-auth', token).send(user);
+      res.header('x-auth', token).status(200).send(user);
     });
   }).catch(() => {
     res.status(400).send();
@@ -174,19 +178,26 @@ app.delete('/api/users/me/token', authenticate, (req, res) => {
   });
 });
 
+// handle every other route with index.html, which will contain
+// a script tag to your application's JavaScript file(s).
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+});
+
 //Default 404 page
 app.use((req, res) => {
-    res.type('text/html');
-    res.status(404);
-    res.send('404 - Not Found');
+  console.log('404 - Not Found');
+  res.type('text/html');
+  res.status(404);
+  res.send('404 - Not Found');
 });
 
 // Default 500 Error page
 app.use((err, req, res) => {
-    console.error(err.stack);
-    res.type('text/html');
-    res.status(500);
-    res.send('500 - Server Error');
+  console.error(err.stack);
+  res.type('text/html');
+  res.status(500);
+  res.send('500 - Server Error');
 });
 
 app.listen(port, () => {

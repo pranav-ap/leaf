@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema({
   }]
 });
 
-// gets called when we respond with res.send. JSON.stringify is what calls toJSON. 
+// gets called when we respond with res.send. JSON.stringify is what calls toJSON.
 UserSchema.methods.toJSON = () => {
   const user = this;
   const userObject = user.toObject();
@@ -47,6 +47,7 @@ UserSchema.methods.generateAuthToken = () => {
   const access = 'auth';
   // sign( data to sign, secret)
   const token = jwt.sign({ _id: user._id.toHexString(), access }, process.env.JWT_SECRET).toString();
+  console.log('from gen auth token: ', token);
 
   user.tokens.push({ access, token });
 
@@ -75,7 +76,7 @@ UserSchema.statics.findbyToken = (token) => {
   } catch (e) {
     return Promise.reject();
   }
-  return User.findOne({
+  return User.find({
     '_id': decoded._id,
     'tokens.token': token,
     'tokens.access': 'auth'
@@ -85,7 +86,7 @@ UserSchema.statics.findbyToken = (token) => {
 UserSchema.statics.findByCredentials = (email, password) => {
   const User = this;
 
-  return User.findOne({ email }).then((user) => {
+  return User.find({ email }).then((user) => {
     if (!user) {
       return Promise.reject();
     }
@@ -102,19 +103,23 @@ UserSchema.statics.findByCredentials = (email, password) => {
   });
 };
 
-UserSchema.pre('save', (next) => {
+// must not use () => as this distrupts 'this'
+UserSchema.pre('save', function (next) {
+  console.log('inside save 1');
   const user = this;
 
   if (user.isModified('password')) {
+    console.log('inside save 2');
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(user.password, salt, (err, hash) => {
+        console.log('inside pre save , ', hash);
         user.password = hash;
         next();
       });
     });
-  } else {
-    next();
   }
+
+  next();
 });
 
 const User = mongoose.model('User', UserSchema);

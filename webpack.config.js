@@ -19,6 +19,9 @@ module.exports = {
       compressor: {
         warnings: false
       }
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     })
   ],
   output: {
@@ -33,8 +36,8 @@ module.exports = {
 			'./src/actions',
 			'./src/reducers',
 			'./src/router',
-			'./src/store',
-      './src/scss'
+      './src/scss',
+			'./src/store'
 		],
     alias: {},
     extensions: ['', '.js', '.jsx']
@@ -55,10 +58,12 @@ module.exports = {
       },
       // the url-loader uses DataUrls.
       // the file-loader emits files.
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]'
       },
-      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader?limit=10000&name=fonts/[name].[ext]'
       },
       {
@@ -81,16 +86,10 @@ module.exports = {
       }
     ]
   },
-  node: {
-    fs: 'empty'
-  },
   devServer: {
     port: 3001,
     historyApiFallback: true,
-    contentBase: './server/public',
-    //inline: true,
-    proxy: {
-      '/api': 'http://localhost:3000'
-    }
+    contentBase: './public',
+    inline: true
   }
 };

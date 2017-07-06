@@ -21,6 +21,13 @@ export const todosReducer = (state = [], action) => {
         }
         return todo;
       });
+    case 'DELETE_TODO':
+      return state.filter((todo) => {
+        if (todo.id === action.id) {
+          return false;
+        }
+        return true;
+      });
     case 'ADD_TODOS':
       return [
         ...state,

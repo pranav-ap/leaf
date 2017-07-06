@@ -33,8 +33,8 @@ export class Start extends React.Component {
         <div id='form'>
           <input type="email" ref="email" placeholder="Enter email address" />
           <input type="password" ref="password" placeholder="Password" />
-          <button onClick={this.onLogin.bind(this)}>Login</button>
-          <button onClick={this.onSignup.bind(this)}>Signup</button>
+          <button id='login' onClick={this.onLogin.bind(this)}>Login</button>
+          <button id='signup' onClick={this.onSignup.bind(this)}>Signup</button>
         </div>
       </div>
     );
