@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 // gets called when we respond with res.send. JSON.stringify is what calls toJSON.
-UserSchema.methods.toJSON = () => {
+UserSchema.methods.toJSON = function () {
   const user = this;
   const userObject = user.toObject();
 
@@ -42,12 +42,11 @@ UserSchema.methods.toJSON = () => {
 };
 
 // methods are defined on the document (instance)
-UserSchema.methods.generateAuthToken = () => {
+UserSchema.methods.generateAuthToken = function () {
   const user = this; // 'this' refers to document
   const access = 'auth';
   // sign( data to sign, secret)
   const token = jwt.sign({ _id: user._id.toHexString(), access }, process.env.JWT_SECRET).toString();
-  console.log('from gen auth token: ', token);
 
   user.tokens.push({ access, token });
 
@@ -56,7 +55,7 @@ UserSchema.methods.generateAuthToken = () => {
   });
 };
 
-UserSchema.methods.removeToken = (token) => {
+UserSchema.methods.removeToken = function (token) {
   const user = this;
 
   return user.update({
@@ -67,7 +66,7 @@ UserSchema.methods.removeToken = (token) => {
 };
 
 // statics are the methods defined on the Model.
-UserSchema.statics.findbyToken = (token) => {
+UserSchema.statics.findbyToken = function (token) {
   const User = this;
   let decoded;
 
@@ -76,26 +75,35 @@ UserSchema.statics.findbyToken = (token) => {
   } catch (e) {
     return Promise.reject();
   }
-  return User.find({
+  return User.findOne({
     '_id': decoded._id,
     'tokens.token': token,
     'tokens.access': 'auth'
   });
 };
 
-UserSchema.statics.findByCredentials = (email, password) => {
+UserSchema.statics.findByCredentials = function (email, password) {
   const User = this;
 
-  return User.find({ email }).then((user) => {
+  return User.findOne({ email }).then((user) => {
     if (!user) {
+      console.log('pangolin here');
       return Promise.reject();
     }
 
+    console.log('pangolin gagaa');
+
     return new Promise((resolve, reject) => {
-      bcrypt.compare(password, user.password, (err, res) => {
-        if (res) {
+      bcrypt.comparePassword(password, (err, isAMatch) => {
+        console.log('password ', password);
+        //console.log('user.password ', user.password);
+        console.log('isAMatch ', isAMatch);
+        console.log('err: ', err);
+        if (isAMatch) {
+          console.log('dogs');
           resolve(user);
         } else {
+          console.log('cats');
           reject();
         }
       });
@@ -105,15 +113,14 @@ UserSchema.statics.findByCredentials = (email, password) => {
 
 // must not use () => as this distrupts 'this'
 UserSchema.pre('save', function (next) {
-  console.log('inside save 1');
   const user = this;
 
   if (user.isModified('password')) {
-    console.log('inside save 2');
     bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(user.password, salt, (err, hash) => {
-        console.log('inside pre save , ', hash);
+      bcrypt.hash(user.password, salt, (error, hash) => {
+        console.log('hash being stored is ', hash);
         user.password = hash;
+         console.log('USER.PASSWORD: ', user.password);
         next();
       });
     });

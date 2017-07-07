@@ -133,21 +133,16 @@ app.patch('/api/todos/:id', authenticate, (req, res) => {
 
 // Sign up
 app.post('/api/users', (req, res) => {
-  console.log('inside signup');
   const body = _.pick(req.body, ['email', 'password']);
   const user = new User(body);
-  console.log(user);
 
   user.save().then(() => {
-    console.log('1');
     return user.generateAuthToken();
   }).then((token) => {
-    console.log('2');
     // header(key, value) x- means custom header
     res.header('x-auth', token).status(200).send(user);
-  }).catch(() => {
-    console.log('3');
-    res.status(400).send();
+  }).catch((e) => {
+    res.status(400).send(e);
   });
 });
 
@@ -159,12 +154,17 @@ app.get('/api/users/me', authenticate, (req, res) => {
 // login
 app.post('/api/users/login', (req, res) => {
   const body = _.pick(req.body, ['email', 'password']);
+  console.log('server');
+  console.log('password ', body.password);
 
   User.findByCredentials(body.email, body.password).then((user) => {
+    console.log('1');
     return user.generateAuthToken().then((token) => {
-      res.header('x-auth', token).status(200).send(user);
+      console.log('2');
+      res.header('x-auth', token).send(user);
     });
   }).catch(() => {
+    console.log('3');
     res.status(400).send();
   });
 });
