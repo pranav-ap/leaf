@@ -12,7 +12,7 @@ const todos = [{
   _id: new ObjectID(),
   text: 'Second test todo',
   completed: true,
-  completedAt: 333
+  startTime: 333
 }];
 
 beforeEach((done) => {
@@ -157,12 +157,12 @@ describe('PATCH /todos/:id', () => {
       .expect((res) => {
         expect(res.body.todo.text).toBe(text);
         expect(res.body.todo.completed).toBe(true);
-        expect(res.body.todo.completedAt).toBeA('number');
+        expect(res.body.todo.startTime).toBeA('number');
       })
       .end(done);
   });
 
-  it('should clear completedAt when todo is not completed', (done) => {
+  it('should clear startTime when todo is not completed', (done) => {
     var hexId = todos[1]._id.toHexString();
     var text = 'This should be the new text!!';
 
@@ -176,7 +176,7 @@ describe('PATCH /todos/:id', () => {
       .expect((res) => {
         expect(res.body.todo.text).toBe(text);
         expect(res.body.todo.completed).toBe(false);
-        expect(res.body.todo.completedAt).toNotExist();
+        expect(res.body.todo.startTime).toNotExist();
       })
       .end(done);
   });

@@ -1,5 +1,6 @@
 //import moment from 'moment';
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 
 // Search text
 export const setSearchText = (searchText) => {
@@ -97,7 +98,9 @@ const signup = (user) => {
 export const startSignup = (email, password) => {
   return (dispatch) => {
     axios.post('/api/users', { email, password }).then((user) => { // user contains _id and email
+      console.log('actions js startSignup - ', user);
       dispatch(signup(user));
+      browserHistory.push('/home');
     }).catch(() => {
 
     });
@@ -115,7 +118,9 @@ const login = (user) => {
 export const startLogin = (email, password) => {
   return (dispatch) => {
     return axios.post('/api/users/login', { email, password }).then((user) => {
+      console.log('actions js startLogin - ', user);
       dispatch(login(user));
+      browserHistory.push('/home');
     }).catch(() => {
 
     });
@@ -135,6 +140,16 @@ export const startLogout = () => {
       dispatch(logout());
     }).catch(() => {
 
+    });
+  };
+};
+
+export const checkIfLoggedIn = () => {
+  return () => {
+    return axios.get('/api/users/me').then(() => {
+      return true;
+    }).then(() => {
+      return false;
     });
   };
 };

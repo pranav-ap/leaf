@@ -11,7 +11,7 @@ const Todo = mongoose.model('Todo', {
     type: Boolean,
     default: false
   },
-  completedAt: {
+  startTime: {
     type: Number,
     default: null
   },

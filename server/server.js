@@ -111,10 +111,10 @@ app.patch('/api/todos/:id', authenticate, (req, res) => {
   }
 
   if (_.isBoolean(body.completed) && body.completed) {
-    body.completedAt = new Date().getTime();
+    body.startTime = new Date().getTime();
   } else {
     body.completed = false;
-    body.completedAt = null;
+    body.startTime = null;
   }
 
   Todo.findOneAndUpdate({
@@ -154,17 +154,12 @@ app.get('/api/users/me', authenticate, (req, res) => {
 // login
 app.post('/api/users/login', (req, res) => {
   const body = _.pick(req.body, ['email', 'password']);
-  console.log('server');
-  console.log('password ', body.password);
 
   User.findByCredentials(body.email, body.password).then((user) => {
-    console.log('1');
     return user.generateAuthToken().then((token) => {
-      console.log('2');
-      res.header('x-auth', token).send(user);
+      res.header('x-auth', token).status(200).send(user);
     });
   }).catch(() => {
-    console.log('3');
     res.status(400).send();
   });
 });

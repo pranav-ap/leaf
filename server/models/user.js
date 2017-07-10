@@ -75,6 +75,7 @@ UserSchema.statics.findbyToken = function (token) {
   } catch (e) {
     return Promise.reject();
   }
+
   return User.findOne({
     '_id': decoded._id,
     'tokens.token': token,
@@ -87,23 +88,14 @@ UserSchema.statics.findByCredentials = function (email, password) {
 
   return User.findOne({ email }).then((user) => {
     if (!user) {
-      console.log('pangolin here');
       return Promise.reject();
     }
 
-    console.log('pangolin gagaa');
-
     return new Promise((resolve, reject) => {
-      bcrypt.comparePassword(password, (err, isAMatch) => {
-        console.log('password ', password);
-        //console.log('user.password ', user.password);
-        console.log('isAMatch ', isAMatch);
-        console.log('err: ', err);
+      bcrypt.compare(password, user.password, (err, isAMatch) => {
         if (isAMatch) {
-          console.log('dogs');
           resolve(user);
         } else {
-          console.log('cats');
           reject();
         }
       });
@@ -118,15 +110,13 @@ UserSchema.pre('save', function (next) {
   if (user.isModified('password')) {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(user.password, salt, (error, hash) => {
-        console.log('hash being stored is ', hash);
         user.password = hash;
-         console.log('USER.PASSWORD: ', user.password);
         next();
       });
     });
+  } else {
+    next();
   }
-
-  next();
 });
 
 const User = mongoose.model('User', UserSchema);

@@ -37,7 +37,8 @@ module.exports = {
 			'./src/reducers',
 			'./src/router',
       './src/scss',
-			'./src/store'
+			'./src/store',
+      './src/utils'
 		],
     alias: {},
     extensions: ['', '.js', '.jsx']
@@ -89,7 +90,7 @@ module.exports = {
   devServer: {
     port: 3001,
     historyApiFallback: true,
-    contentBase: './public',
+    contentBase: './server/public',
     inline: true
   }
 };
