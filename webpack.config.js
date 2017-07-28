@@ -12,7 +12,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      '$': 'jquery', // Assigning the $ and jQuery to jquery when bundle
+      '$': 'jquery',
       'jQuery': 'jquery'
     }),
     new webpack.optimize.UglifyJsPlugin({

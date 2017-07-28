@@ -2,16 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { filterTodos } from 'filters';
-import { startAddTodos } from 'actions';
 
 import Todo from 'Todo';
 
 export class List extends React.Component {
-  List() {
-    const { dispatch } = this.props;
-    dispatch(startAddTodos());  
-  }
-
   render() {
     const { searchText, todos } = this.props;
 

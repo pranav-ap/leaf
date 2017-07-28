@@ -28,13 +28,15 @@ export class Start extends React.Component {
     return (
       <div id='start'>
         <div id='header'>
-          <p>Pangolin</p>
+          <p>Groundhog</p>
         </div>
         <div id='form'>
           <input type="email" ref="email" placeholder="Enter email address" />
           <input type="password" ref="password" placeholder="Password" />
-          <button id='login' onClick={this.onLogin.bind(this)}>Login</button>
-          <button id='signup' onClick={this.onSignup.bind(this)}>Signup</button>
+          <div id='button-group'>
+            <button id='login' onClick={this.onLogin.bind(this)}>Login</button>
+            <button id='signup' onClick={this.onSignup.bind(this)}>Signup</button>
+          </div>
         </div>
       </div>
     );

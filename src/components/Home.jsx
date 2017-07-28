@@ -6,8 +6,13 @@ import Toolbar from 'Toolbar';
 import Header from 'Header';
 import List from 'List';
 
+import { startAddTodos } from 'actions';
+
 export class Home extends React.Component {
   render() {
+    const { dispatch } = this.props;
+    dispatch(startAddTodos());
+
     return (
       <div id='home'>
         <Header />

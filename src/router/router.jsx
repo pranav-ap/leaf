@@ -9,7 +9,6 @@ import { checkIfLoggedIn } from 'actions';
 
 const requireLogin = (nextState, replace, next) => {
   if (!checkIfLoggedIn()) {
-    console.log('router.jsx - replace /');
     replace('/');
   }
   next();
