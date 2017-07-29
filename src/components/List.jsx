@@ -4,6 +4,18 @@ import { connect } from 'react-redux';
 import Todo from 'Todo';
 
 export class List extends React.Component {
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    document.getElementById('dummy').scrollIntoView({ behavior: 'smooth' });
+  }
+
   render() {
     const { todos } = this.props;
     let number = 0;
@@ -25,6 +37,7 @@ export class List extends React.Component {
     return (
       <div id='list'>
         {renderTodos()}
+        <div id='dummy'></div>
       </div>
     );
   }

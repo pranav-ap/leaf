@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Search from 'Search';
 import Toolbar from 'Toolbar';
-import Header from 'Header';
+import Topbar from 'Topbar';
 import List from 'List';
 
 import { startAddTodos } from 'actions';
@@ -15,8 +14,7 @@ export class Home extends React.Component {
 
     return (
       <div id='home'>
-        <Header />
-        <Search />
+        <Topbar />
         <List />
         <Toolbar />
       </div>

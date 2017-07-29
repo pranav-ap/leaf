@@ -13,7 +13,7 @@ export class Toolbar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id='toolbar'>
         <button onClick={this.onNew.bind(this)}>New</button>
       </div>
     );
