@@ -1,26 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { filterTodos } from 'filters';
-
 import Todo from 'Todo';
 
 export class List extends React.Component {
   render() {
-    const { searchText, todos } = this.props;
+    const { todos } = this.props;
+    let number = 0;
 
     const renderTodos = () => {
-      const filteredTodos = filterTodos(todos, searchText);
-
-      if (filteredTodos.length === 0) {
+      if (todos.length === 0) {
         return (
           <p id='empty'>There is nothing to show.</p>
         );
       }
 
-      return filteredTodos.map((todo) => {
+      return todos.map((todo) => {
         return (
-          <Todo key={todo._id} {...todo} />
+          <Todo key={number++} {...todo} />
         );
       });
     };
@@ -35,7 +32,6 @@ export class List extends React.Component {
 
 export default connect(state => {
   return {
-    todos: state.todos,
-    searchText: state.searchText
+    todos: state.todos
   };
 })(List);

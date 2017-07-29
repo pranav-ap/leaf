@@ -28,7 +28,7 @@ export const startAddTodo = (text) => {
       'x-auth': localStorage.getItem('x-auth')
     };
 
-    return axios.post('/api/todos', { todo }, { headers }).then(() => {
+    return axios.post('/api/todos', todo, { headers }).then(() => {
       dispatch(addTodo(todo));
     }).catch(() => {
 
@@ -95,7 +95,7 @@ export const startUpdateTodo = (id, todo) => {
       'x-auth': localStorage.getItem('x-auth')
     };
 
-    return axios.patch(`/api/todos/:${id}`, { todo }, { headers }).then(() => {
+    return axios.patch(`/api/todos/:${id}`, todo, { headers }).then(() => {
       dispatch(updateTodo(id, todo));
     }).catch(() => {
 

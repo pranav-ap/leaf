@@ -35,8 +35,8 @@ app.post('/api/todos', authenticate, (req, res) => {
 
   todo.save().then((doc) => {
     res.status(200).send(doc);
-  }, () => {
-    res.status(400).send();
+  }, (e) => {
+    res.status(400).send(e);
   });
 });
 
@@ -46,8 +46,8 @@ app.get('/api/todos', authenticate, (req, res) => {
     _creator: req.user._id
   }).then((todos) => {
     res.status(200).send({ todos });
-  }, () => {
-    res.status(400).send();
+  }, (e) => {
+    res.status(400).send(e);
   });
 });
 
@@ -68,8 +68,8 @@ app.get('/api/todos/:id', authenticate, (req, res) => {
     }
 
     res.status(200).send({ todo });
-  }).catch(() => {
-    res.status(400).send();
+  }).catch((e) => {
+    res.status(400).send(e);
   });
 });
 
@@ -90,8 +90,8 @@ app.delete('/api/todos/:id', authenticate, (req, res) => {
     }
 
     res.status(200).send({ todo });
-  }).catch(() => {
-    res.status(400).send();
+  }).catch((e) => {
+    res.status(400).send(e);
   });
 });
 
@@ -120,8 +120,8 @@ app.patch('/api/todos/:id', authenticate, (req, res) => {
     }
 
     res.status(200).send({ todo });
-  }).catch(() => {
-    res.status(400).send();
+  }).catch((e) => {
+    res.status(400).send(e);
   });
 });
 
@@ -136,6 +136,7 @@ app.post('/api/users', (req, res) => {
     // header(key, value) x- means custom header
     res.header('x-auth', token).status(200).send(user);
   }).catch((e) => {
+    console.log('error in sign up ', e);
     res.status(400).send(e);
   });
 });
@@ -153,8 +154,9 @@ app.post('/api/users/login', (req, res) => {
     return user.generateAuthToken().then((token) => {
       res.header('x-auth', token).status(200).send(user);
     });
-  }).catch(() => {
-    res.status(400).send();
+  }).catch((e) => {
+    console.log('error in log in ', e);
+    res.status(400).send(e);
   });
 });
 
@@ -162,8 +164,8 @@ app.post('/api/users/login', (req, res) => {
 app.delete('/api/users/me/token', authenticate, (req, res) => {
   req.user.removeToken(req.token).then(() => {
     res.status(200).send();
-  }).catch(() => {
-    res.status(400).send();
+  }).catch((e) => {
+    res.status(400).send(e);
   });
 });
 
