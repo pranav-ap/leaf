@@ -24,12 +24,11 @@ export const startAddTodo = (text) => {
       text
     };
 
-    const token = localStorage.getItem('x-auth');
-    // const headers = {
-    //   'x-auth': token
-    // };
+    const headers = {
+      'x-auth': localStorage.getItem('x-auth')
+    };
 
-    return axios.post('/api/todos', { todo }, { 'x-auth': token }).then(() => {
+    return axios.post('/api/todos', { todo }, { headers }).then(() => {
       dispatch(addTodo(todo));
     }).catch(() => {
 
@@ -47,9 +46,11 @@ const addTodos = (todos) => {
 
 export const startAddTodos = () => {
   return (dispatch) => {
-    const token = localStorage.getItem('x-auth');
+    const headers = {
+      'x-auth': localStorage.getItem('x-auth')
+    };
 
-    return axios.get('/api/todos', { 'x-auth': token }).then((todos) => {
+    return axios.get('/api/todos', { headers }).then((todos) => {
       dispatch(addTodos(todos));
     }).catch(() => {
 
@@ -67,9 +68,11 @@ const deleteTodo = (todo) => {
 
 export const startDeleteTodo = (id) => {
   return (dispatch) => {
-    const token = localStorage.getItem('x-auth');
+    const headers = {
+      'x-auth': localStorage.getItem('x-auth')
+    };
 
-    return axios.delete(`/api/todos/:${id}`, { 'x-auth': token }).then((todo) => {
+    return axios.delete(`/api/todos/:${id}`, { headers }).then((todo) => {
       dispatch(deleteTodo(todo));
     }).catch(() => {
 
@@ -88,9 +91,11 @@ const updateTodo = (id, todo) => {
 
 export const startUpdateTodo = (id, todo) => {
   return (dispatch) => {
-    const token = localStorage.getItem('x-auth');
+    const headers = {
+      'x-auth': localStorage.getItem('x-auth')
+    };
 
-    return axios.patch(`/api/todos/:${id}`, { todo }, { 'x-auth': token }).then(() => {
+    return axios.patch(`/api/todos/:${id}`, { todo }, { headers }).then(() => {
       dispatch(updateTodo(id, todo));
     }).catch(() => {
 
@@ -159,9 +164,11 @@ const logout = () => {
 
 export const startLogout = () => {
   return (dispatch) => {
-    const token = localStorage.getItem('x-auth');
+    const headers = {
+      'x-auth': localStorage.getItem('x-auth')
+    };
 
-    return axios.delete('/api/users/me/token', { 'x-auth': token }).then(() => {
+    return axios.delete('/api/users/me/token', { headers }).then(() => {
       dispatch(logout());
       localStorage.removeItem('x-auth');
     }).catch(() => {
@@ -172,9 +179,11 @@ export const startLogout = () => {
 
 export const checkIfLoggedIn = () => {
   return () => {
-    const token = localStorage.getItem('x-auth');
+    const headers = {
+      'x-auth': localStorage.getItem('x-auth')
+    };
 
-    return axios.get('/api/users/me', { 'x-auth': token }).then(() => {
+    return axios.get('/api/users/me', { headers }).then(() => {
       return true;
     }).then(() => {
       return false;
