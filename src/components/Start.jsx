@@ -28,7 +28,7 @@ export class Start extends React.Component {
     return (
       <div id='start'>
         <div id='header'>
-          <p>Groundhog</p>
+          <p><i className="fa fa-leaf" aria-hidden="true" />&nbsp;&nbsp;Leaf</p>
         </div>
         <div id='form'>
           <input type="email" ref="email" placeholder="Enter email address" />

@@ -14,7 +14,10 @@ export class Toolbar extends React.Component {
   render() {
     return (
       <div id='toolbar'>
-        <button onClick={this.onNew.bind(this)}>New</button>
+        <button onClick={this.onNew.bind(this)}><i className="fa fa-cog" aria-hidden="true" /></button>
+        <button onClick={this.onNew.bind(this)}><i className="fa fa-graduation-cap" aria-hidden="true" /></button>
+        <button onClick={this.onNew.bind(this)}><i className="fa fa-spoon" aria-hidden="true" /></button>
+        <button onClick={this.onNew.bind(this)}><i className="fa fa-clock-o" aria-hidden="true" /></button>
       </div>
     );
   }

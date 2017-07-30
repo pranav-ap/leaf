@@ -5,8 +5,8 @@ export default class Post extends React.Component {
     const { text } = this.props;
 
     return (
-      <div id='todo'>
-        <p>Todo {text}</p>
+      <div className='todo'>
+        <p className='message'>{text}</p>
       </div>
     );
   }

@@ -7,7 +7,7 @@
   width: 100%;
   height: $toolbar-height;
 
-  padding: 15px 20px;
+  padding: 0px 20px;
   border-top: 1px solid $invisible-color;
 
   background-color: inherit;
@@ -22,5 +22,20 @@
 
   // desktops and above - medium and large devices
   @media (min-width: 992px) {
+  }
+
+  button {
+    background-color: inherit;
+    color: white;
+
+    display: inline-block;
+
+    font-size: 35px;
+
+    border: 0px;
+    outline: none;
+
+    margin: 0px;
+    padding: 10px 35px;
   }
 }
