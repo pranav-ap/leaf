@@ -7,13 +7,9 @@ const Todo = mongoose.model('Todo', {
     minlength: 1,
     trim: true
   },
-  completed: {
+  today: {
     type: Boolean,
     default: false
-  },
-  startTime: {
-    type: Number,
-    default: null
   },
   _creator: {
     type: mongoose.Schema.Types.ObjectId,

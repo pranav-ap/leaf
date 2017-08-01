@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import Toolbar from 'Toolbar';
 import Topbar from 'Topbar';
 import List from 'List';
+//import CreateModal from 'CreateModal';
 
-import { startAddTodos } from 'actions';
+import { startAddTodos } from 'todosActions';
 
 export class Home extends React.Component {
   render() {

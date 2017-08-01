@@ -98,17 +98,17 @@ app.delete('/api/todos/:id', authenticate, (req, res) => {
 // update a todo
 app.patch('/api/todos/:id', authenticate, (req, res) => {
   const id = req.params.id;
-  const body = _.pick(req.body, ['text', 'completed']);
+  const body = _.pick(req.body, ['text', 'today']);
 
   if (!ObjectID.isValid(id)) {
     return res.status(404).send();
   }
 
-  if (_.isBoolean(body.completed) && body.completed) {
-    body.startTime = new Date().getTime();
+  if (_.isBoolean(body.today) && body.today) {
+    //body.startTime = new Date().getTime();
   } else {
-    body.completed = false;
-    body.startTime = null;
+    body.today = false;
+    //body.startTime = null;
   }
 
   Todo.findOneAndUpdate({
@@ -134,6 +134,7 @@ app.post('/api/users', (req, res) => {
     return user.generateAuthToken();
   }).then((token) => {
     // header(key, value) x- means custom header
+    console.log('signup is good');
     res.header('x-auth', token).status(200).send(user);
   }).catch((e) => {
     console.log('error in sign up ', e);
@@ -172,7 +173,7 @@ app.delete('/api/users/me/token', authenticate, (req, res) => {
 // handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 //Default 404 page

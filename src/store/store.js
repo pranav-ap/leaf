@@ -1,11 +1,11 @@
 import { combineReducers, applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { searchTextReducer, todosReducer } from 'reducers';
+import { todosReducer, authReducer } from 'reducers';
 
 export const configure = (initialState = {}) => {
   const reducer = combineReducers({
-    searchText: searchTextReducer,
-    todos: todosReducer
+    todos: todosReducer,
+    auth: authReducer
   });
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

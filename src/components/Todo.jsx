@@ -2,10 +2,11 @@ import React from 'react';
 
 export default class Post extends React.Component {
   render() {
-    const { text } = this.props;
+    const { text, today } = this.props;
+    const todoClassName = today ? 'todo todo-completed' : 'todo';
 
     return (
-      <div className='todo'>
+      <div className={todoClassName} >
         <p className='message'>{text}</p>
       </div>
     );

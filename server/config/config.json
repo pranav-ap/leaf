@@ -1,12 +1,12 @@
 {
   "test": {
     "PORT": 3000,
-    "MONGODB_URI": "mongodb://localhost:27017/TodoAppTest",
+    "MONGODB_URI": "mongodb://localhost:27017/KrakenDBTest",
     "JWT_SECRET": "sfrwtgerwgriyua234wz"
   },
   "development": {
     "PORT": 3000,
-    "MONGODB_URI": "mongodb://localhost:27017/TodoApp",
+    "MONGODB_URI": "mongodb://localhost:27017/KrakenDB",
     "JWT_SECRET": "oiiexnubil6778nwrrghh"
   }
 }

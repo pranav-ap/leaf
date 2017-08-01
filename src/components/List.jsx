@@ -1,33 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { sortTodos } from 'sortTodos'
+
 import Todo from 'Todo';
 
 export class List extends React.Component {
-  componentDidMount() {
-    this.scrollToBottom();
-  }
-
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
-
-  scrollToBottom = () => {
-    document.getElementById('dummy').scrollIntoView({ behavior: 'smooth' });
-  }
-
   render() {
     const { todos } = this.props;
     let number = 0;
 
+    const sortedTodos = sortTodos.sortTodos(todos);
+
     const renderTodos = () => {
-      if (todos.length === 0) {
+      if (sortedTodos.length === 0) {
         return (
           <p id='empty'>There is nothing to show.</p>
         );
       }
 
-      return todos.map((todo) => {
+      return sortedTodos.map((todo) => {
         return (
           <Todo key={number++} {...todo} />
         );
@@ -37,7 +29,6 @@ export class List extends React.Component {
     return (
       <div id='list'>
         {renderTodos()}
-        <div id='dummy'></div>
       </div>
     );
   }

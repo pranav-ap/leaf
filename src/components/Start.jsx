@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { startSignup, startLogin } from 'actions';
+import { startSignup, startLogin } from 'authActions';
 
 export class Start extends React.Component {
   onLogin(e) {
@@ -28,10 +28,10 @@ export class Start extends React.Component {
     return (
       <div id='start'>
         <div id='header'>
-          <p><i className="fa fa-leaf" aria-hidden="true" />&nbsp;&nbsp;Leaf</p>
+          <p><i className="fa fa-leaf" aria-hidden="true" />&nbsp;&nbsp;Kraken</p>
         </div>
         <div id='form'>
-          <input type="email" ref="email" placeholder="Enter email address" />
+          <input type="email" ref="email" placeholder="Enter email address" autoFocus />
           <input type="password" ref="password" placeholder="Password" />
           <div id='button-group'>
             <button id='login' onClick={this.onLogin.bind(this)}>Login</button>
