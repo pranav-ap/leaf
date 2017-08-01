@@ -10,7 +10,7 @@ export class List extends React.Component {
     const { todos } = this.props;
     let number = 0;
 
-    const sortedTodos = sortTodos.sortTodos(todos);
+    const sortedTodos = sortTodos(todos);
 
     const renderTodos = () => {
       if (sortedTodos.length === 0) {

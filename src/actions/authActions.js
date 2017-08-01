@@ -15,7 +15,7 @@ export const startSignup = (email, password) => {
     // user contains _id and email
     return axios.post('/api/users', { email, password }).then((res) => {
       if (typeof (Storage) !== 'undefined') {
-        localStorage.setItem('x-auth', user.headers['x-auth']);
+        localStorage.setItem('x-auth', res.headers['x-auth']);
         dispatch(signup(res.data));
         browserHistory.push('/home');
       } else {
@@ -39,7 +39,7 @@ export const startLogin = (email, password) => {
   return (dispatch) => {
     return axios.post('/api/users/login', { email, password }).then((res) => {
       if (typeof (Storage) !== 'undefined') {
-        localStorage.setItem('x-auth', user.headers['x-auth']);
+        localStorage.setItem('x-auth', res.headers['x-auth']);
         dispatch(login(res.data));
         browserHistory.push('/home');
       } else {
@@ -73,19 +73,19 @@ export const startLogout = () => {
     });
   };
 };
-
-export const checkIfLoggedIn = () => {
-  return () => {
-    const headers = {
-      'x-auth': localStorage.getItem('x-auth')
-    };
-
-    return axios.get('/api/users/me', { headers }).then(() => {
-      browserHistory.push('/home');
-      //return true;
-    }).catch(() => {
-      browserHistory.push('/');
-      //return false;
-    });
-  };
-};
+//
+// export const checkIfLoggedIn = () => {
+//   return () => {
+//     const headers = {
+//       'x-auth': localStorage.getItem('x-auth')
+//     };
+//
+//     return axios.get('/api/users/me', { headers }).then(() => {
+//       browserHistory.push('/home');
+//       //return true;
+//     }).catch(() => {
+//       browserHistory.push('/');
+//       //return false;
+//     });
+//   };
+// };

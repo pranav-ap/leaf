@@ -7,7 +7,7 @@ import Start from 'Start';
 
 export default (
   <Router history={browserHistory}>
-    <Route path="/" component={Container}>
+    <Route path='/' component={Container}>
       <IndexRoute component={Start} />
       <Route path='home' component={Home} />
     </Route>

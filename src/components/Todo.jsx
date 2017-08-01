@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Post extends React.Component {
+export default class Todo extends React.Component {
   render() {
     const { text, today } = this.props;
     const todoClassName = today ? 'todo todo-completed' : 'todo';

@@ -28,12 +28,12 @@ export const todosReducer = (state = [], action) => {
   }
 };
 
-export const authReducer = (state = false, action) => {
+export const authReducer = (state = {}, action) => {
   switch (action.type) {
     case 'LOGIN':
       return action.user;
     case 'LOGOUT':
-      return false;
+      return {};
     case 'SIGNUP':
       return action.user;
     default:
