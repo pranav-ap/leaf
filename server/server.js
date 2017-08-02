@@ -104,13 +104,6 @@ app.patch('/api/todos/:id', authenticate, (req, res) => {
     return res.status(404).send();
   }
 
-  if (_.isBoolean(body.today) && body.today) {
-    //body.startTime = new Date().getTime();
-  } else {
-    body.today = false;
-    //body.startTime = null;
-  }
-
   Todo.findOneAndUpdate({
     _id: id,
     _creator: req.user._id
@@ -134,7 +127,6 @@ app.post('/api/users', (req, res) => {
     return user.generateAuthToken();
   }).then((token) => {
     // header(key, value) x- means custom header
-    console.log('signup is good');
     res.header('x-auth', token).status(200).send(user);
   }).catch((e) => {
     console.log('error in sign up ', e);

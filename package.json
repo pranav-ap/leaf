@@ -1,5 +1,5 @@
 {
-  "name": "groundhog",
+  "name": "leaf",
   "version": "1.0.0",
   "description": "A minimalist todo app",
   "main": "index.js",
@@ -38,7 +38,6 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "bluebird": "^3.4.7",
-    "bootstrap": "^4.0.0-alpha.6",
     "css-loader": "^0.26.1",
     "eslint": "^3.12.2",
     "eslint-config-rallycoding": "^3.1.0",

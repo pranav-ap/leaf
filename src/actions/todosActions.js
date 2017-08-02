@@ -11,7 +11,8 @@ const addTodo = (todo) => {
 export const startAddTodo = (text) => {
   return (dispatch) => {
     const todo = {
-      text
+      text,
+      today: false
     };
 
     const headers = {
@@ -49,10 +50,10 @@ export const startAddTodos = () => {
 };
 
 // delete a todo with id
-const deleteTodo = (todo) => {
+const deleteTodo = (id) => {
   return {
     type: 'DELETE_TODO',
-    todo
+    id
   };
 };
 
@@ -62,8 +63,8 @@ export const startDeleteTodo = (id) => {
       'x-auth': localStorage.getItem('x-auth')
     };
 
-    return axios.delete(`/api/todos/:${id}`, { headers }).then((todo) => {
-      dispatch(deleteTodo(todo));
+    return axios.delete(`/api/todos/:${id}`, { headers }).then(() => {
+      dispatch(deleteTodo(id));
     }).catch(() => {
 
     });
