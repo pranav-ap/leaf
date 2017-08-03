@@ -19,8 +19,8 @@ export const startAddTodo = (text) => {
       'x-auth': localStorage.getItem('x-auth')
     };
 
-    return axios.post('/api/todos', todo, { headers }).then(() => {
-      dispatch(addTodo(todo));
+    return axios.post('/api/todos', todo, { headers }).then((res) => {
+      dispatch(addTodo(res.data));
     }).catch(() => {
 
     });
@@ -50,21 +50,21 @@ export const startAddTodos = () => {
 };
 
 // delete a todo with id
-const deleteTodo = (id) => {
+const deleteTodo = (_id) => {
   return {
     type: 'DELETE_TODO',
-    id
+    _id
   };
 };
 
-export const startDeleteTodo = (id) => {
+export const startDeleteTodo = (_id) => {
   return (dispatch) => {
     const headers = {
       'x-auth': localStorage.getItem('x-auth')
     };
 
-    return axios.delete(`/api/todos/:${id}`, { headers }).then(() => {
-      dispatch(deleteTodo(id));
+    return axios.delete(`/api/todos/:${_id}`, { headers }).then(() => {
+      dispatch(deleteTodo(_id));
     }).catch(() => {
 
     });
@@ -72,24 +72,23 @@ export const startDeleteTodo = (id) => {
 };
 
 // update a todo with id
-const updateTodo = (id, todo) => {
+const updateTodo = (_id) => {
   return {
     type: 'UPDATE_TODO',
-    id,
-    todo
+    _id
   };
 };
 
-export const startUpdateTodo = (id, todo) => {
+export const startUpdateTodo = (_id) => {
   return (dispatch) => {
     const headers = {
       'x-auth': localStorage.getItem('x-auth')
     };
 
-    return axios.patch(`/api/todos/:${id}`, todo, { headers }).then(() => {
-      dispatch(updateTodo(id, todo));
+    return axios.patch(`/api/todos/:${_id}`, { }, { headers }).then(() => {
+      dispatch(updateTodo(_id));
     }).catch(() => {
-
+      console.log('error in startUpdateTodo');
     });
   };
 };

@@ -8,7 +8,6 @@ import Todo from 'Todo';
 export class List extends React.Component {
   render() {
     const { todos } = this.props;
-    let number = 0;
 
     const sortedTodos = sortTodos(todos);
 
@@ -21,7 +20,7 @@ export class List extends React.Component {
 
       return sortedTodos.map((todo) => {
         return (
-          <Todo key={number++} {...todo} />
+          <Todo key={todo._id} {...todo} />
         );
       });
     };

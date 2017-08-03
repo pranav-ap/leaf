@@ -96,16 +96,16 @@ app.delete('/api/todos/:id', authenticate, (req, res) => {
 });
 
 // update a todo
-app.patch('/api/todos/:id', authenticate, (req, res) => {
-  const id = req.params.id;
+app.patch('/api/todos/:_id', authenticate, (req, res) => {
+  const _id = req.params._id;
   const body = _.pick(req.body, ['text', 'today']);
 
-  if (!ObjectID.isValid(id)) {
+  if (!ObjectID.isValid(_id)) {
     return res.status(404).send();
   }
 
   Todo.findOneAndUpdate({
-    _id: id,
+    _id,
     _creator: req.user._id
   }, { $set: body }, { new: true }).then((todo) => {
     if (!todo) {
