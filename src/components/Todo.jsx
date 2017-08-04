@@ -12,7 +12,8 @@ export class Todo extends React.Component {
       <div className={todoClassName} onClick={() => {
           dispatch(startUpdateTodo(_id));
         }}>
-        <p className='message'>{text}<span><input type='checkbox' checked={today} /></span></p>
+        <p className='message'>{text}</p>
+        <input type='checkbox' checked={today} />
       </div>
     );
   }

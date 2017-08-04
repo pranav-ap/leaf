@@ -85,7 +85,7 @@ export const startUpdateTodo = (_id) => {
       'x-auth': localStorage.getItem('x-auth')
     };
 
-    return axios.patch(`/api/todos/:${_id}`, { }, { headers }).then(() => {
+    return axios.patch(`/api/todos/:${_id}`, { _id }, { headers }).then(() => {
       dispatch(updateTodo(_id));
     }).catch(() => {
       console.log('error in startUpdateTodo');

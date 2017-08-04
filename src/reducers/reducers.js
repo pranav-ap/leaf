@@ -38,3 +38,15 @@ export const authReducer = (state = {}, action) => {
       return state;
   }
 };
+
+
+export const modeReducer = (state = 'add', action) => {
+  switch (action.type) {
+    case 'DELETE_MODE':
+      return 'delete';
+    case 'ADD_MODE':
+      return 'add';
+    default:
+      return state;
+  }
+};
