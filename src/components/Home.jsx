@@ -1,14 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Toolbar from 'Toolbar';
 import Topbar from 'Topbar';
-import List from 'List';
-import CreateModal from 'CreateModal';
+import Main from 'Main';
+import MobileMain from 'MobileMain';
 
 import { startAddTodos } from 'todosActions';
 
 export class Home extends React.Component {
+  renderMain() {
+    const { isMobile } = this.props;
+
+    if (isMobile) {
+      return (<MobileMain />);
+    }
+
+    return (<Main />);
+  }
+
   render() {
     const { dispatch } = this.props;
     dispatch(startAddTodos());
@@ -16,12 +25,14 @@ export class Home extends React.Component {
     return (
       <div id='home'>
         <Topbar />
-        <CreateModal />
-        <List />
-        <Toolbar />
+        {this.renderMain()}
       </div>
     );
   }
 }
 
-export default connect()(Home);
+export default connect((state) => {
+  return {
+    isMobile: state.isMobile
+  };
+})(Home);
