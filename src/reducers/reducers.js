@@ -6,13 +6,20 @@ export const todosReducer = (state = [], action) => {
         action.todo
       ];
     case 'UPDATE_TODO':
-      return [
-        ...state,
-        action.todo
-      ];
+      return state.map((todo) => {
+        if (todo._id === action._id) {
+          console.log('todo ', todo);
+          console.log('action.todo ', action.todo);
+          return {
+            ...todo,
+            ...action.todo
+          };
+        }
+        return todo;
+      });
     case 'DELETE_TODO':
       return state.filter((todo) => {
-        if (todo.id === action.id) {
+        if (todo._id === action._id) {
           return false;
         }
         return true;

@@ -1,8 +1,0 @@
-<button className="dropdown-button">Logout</button>
-
-<div id='topbar-second'>
-  <button className="dropdown-button">Settings</button>
-  <div className="dropdown-content">
-    <p>Pranav</p>
-  </div>
-</div>

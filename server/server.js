@@ -101,6 +101,7 @@ app.patch('/api/todos/:_id', authenticate, (req, res) => {
   const body = _.pick(req.body, ['text', 'today']);
 
   if (!ObjectID.isValid(_id)) {
+    console.log('fizz ', _id);
     return res.status(404).send();
   }
 
@@ -109,6 +110,7 @@ app.patch('/api/todos/:_id', authenticate, (req, res) => {
     _creator: req.user._id
   }, { $set: body }, { new: true }).then((todo) => {
     if (!todo) {
+      console.log('buzz');
       return res.status(404).send();
     }
 

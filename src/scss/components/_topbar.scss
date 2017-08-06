@@ -23,7 +23,7 @@
   }
 
   p {
-    width: 80%;
+    width: 70%;
 
     padding: 0px;
     margin: 0px;
@@ -35,12 +35,12 @@
 
     //tablets - small devices only
     @media (min-width: 768px) {
-      width: 60%;
+      width: 80%;
     }
   }
 
-  .dropdown-button {
-    width: 20%;
+  #dropdown-button {
+    width: 30%;
     padding: 0px;
     margin: 0px;
 
@@ -53,7 +53,10 @@
     background-color: inherit;
 
     border: 0px;
+    outline: none;
     resize: none;
+
+    text-align: right;
 
     &:hover {
       color: white;
@@ -61,17 +64,42 @@
 
     //tablets - small devices only
     @media (min-width: 768px) {
-      width: 40%;
+      width: 20%;
     }
   }
 
-  .dropdown-content {
+  #dropdown-content {
     display: none;
+
     position: absolute;
-    right: 0;
-    background-color: #f9f9f9;
-    min-width: 160px;
+    right: 15px;
+
+    background-color: $background-color-1;
+    color: $off-white-color;
+
+    width: 250px;
+
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+
+    button {
+      background-color: inherit;
+      color: inherit;
+
+      width: 100%;
+
+      text-align: left;
+
+      outline: none;
+      border: 0px;
+      display: block;
+      padding: 15px;
+      margin: 0px;
+      font-size: 18px;
+
+      &:hover {
+        color: white;
+        background-color: $background-color-2;
+      }
+    }
   }
 }
