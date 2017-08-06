@@ -4,29 +4,21 @@ import { connect } from 'react-redux';
 import Topbar from 'Topbar';
 import List from 'List';
 import AddBar from 'AddBar';
-import Toolbar from 'Toolbar';
 import CreateModal from 'CreateModal';
-//import HoverButton from 'HoverButton';
+import HoverButton from 'HoverButton';
 
 import { startAddTodos } from 'todosActions';
 
 export class Home extends React.Component {
-  renderAddBar() {
+  renderAddBarOrHoverButton() {
     const { isMobile } = this.props;
 
-    if (!isMobile) {
-      console.log('gggggggggggg');
-      return (<AddBar />);
+    if (isMobile) {
+      return (<HoverButton />);
     }
-  }
 
-  // renderHoverButton() {
-  //   const { isMobile } = this.props;
-  // {this.renderHoverButton()}
-  //   if (isMobile) {
-  //     return (<HoverButton />);
-  //   }
-  // }
+    return (<AddBar />);
+  }
 
   render() {
     const { dispatch } = this.props;
@@ -36,9 +28,8 @@ export class Home extends React.Component {
       <div id='home'>
         <Topbar />
         <CreateModal />
-        {this.renderAddBar()}
+        {this.renderAddBarOrHoverButton()}
         <List />
-        <Toolbar />
       </div>
     );
   }

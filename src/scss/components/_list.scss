@@ -6,7 +6,7 @@
   background-color: inherit;
 
   position: absolute;
-  bottom: $toolbar-height;
+  bottom: 0;
   top: $topbar-height;
   left: 0;
   right: 0;
@@ -14,13 +14,12 @@
   overflow-y: auto;
   overflow-x: hidden;
 
-  z-index: 3;
+  z-index: 2;
 
   //tablets - small devices only
   @media (min-width: 768px) {
-    padding: 20px 150px;
-    bottom: $toolbar-height-tablet;
-    top: $topbar-height-tablet + $addbar-height-tablet;
+    padding: 20px 80px;
+    top: $topbar-height + $addbar-height-tablet;
   }
 
   #empty {
@@ -34,5 +33,10 @@
     margin: 5em auto;
 
     font-size: $login-input-font-size;
+  }
+
+  #dummy {
+    height: 50px;
+    width: 100%;
   }
 }

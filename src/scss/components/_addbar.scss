@@ -1,16 +1,18 @@
-#addBar {
+#addbar {
   display: none;
 
   //tablets - small devices only
   @media (min-width: 768px) {
+    display: block;
+
     width: $hundred-percent;
     height: $addbar-height-tablet;
     margin: 0px;
-    padding: 15px;
-
-    display: block;
+    padding: 0px;
 
     background-color: inherit;
+
+    text-align: center;
 
     position: absolute;
     top: $topbar-height-tablet;
@@ -18,7 +20,7 @@
     right: 0;
 
     overflow: hidden;
-    z-index: 3;
+    z-index: 2;
 
     input {
       background-color: inherit;
@@ -31,52 +33,33 @@
 
       padding: 11px;
       margin: 8px 0px;
-      width: 80%;
+      width: 65%;
+
+      text-align: left;
 
       outline: none;
       border: 0px;
       border-bottom: 1px solid $bluish-color;
-
-      //tablets - small devices only
-      @media (min-width: 768px) {
-        font-size: $login-input-font-size-tablet;
-      }
-
-      // desktops and above - medium and large devices
-      @media (min-width: 992px) {
-        font-size: $login-input-font-size-desktop;
-      }
     }
 
     button {
-      background-color: $bluish-color;
-      color: white;
-      font-family: $font-family-1;
-
       display: inline-block;
 
-      font-size: $login-button-font-size;
+      background-color: inherit;
+      color: $bluish-color;
+
+      font-size: 20px;
 
       outline: none;
       border: 0px;
       resize: none;
 
       padding: 10px;
-      margin: 10px 0px;
-      width: 15%;
+      margin: 10px;
+      width: 80px;
 
       &:hover {
         cursor: pointer;
-      }
-
-      //tablets - small devices only
-      @media (min-width: 768px) {
-        font-size: $login-button-font-size-tablet;
-      }
-
-      // desktops and above - medium and large devices
-      @media (min-width: 992px) {
-        font-size: $login-button-font-size-desktop;
       }
     }
   }

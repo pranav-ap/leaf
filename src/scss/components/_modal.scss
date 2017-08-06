@@ -1,33 +1,39 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 4;
+    z-index: 5;
 
-    padding-top: 60px;
+    padding-top: $topbar-height;
     left: 0;
     top: 0;
+    right: 0;
 
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    width: 100%;
+    height: 100%;
 
     overflow: hidden;
 
-    background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
-    /* Modal Content */
+    //tablets - small devices only
+    @media (min-width: 768px) {
+      padding-top: $topbar-height-tablet;
+    }
+
     .modal-content {
       margin: auto;
-      background-color: #46474a;
-      padding: 5px;
-      width: 550px;
+      background-color: $background-color-1;
+      padding: 10px 10px 0px;
 
       resize: none;
       outline: none;
       border: 0px;
+      border-top: 2px solid $background-color-1;
+      border-bottom: 2px solid $background-color-1;
 
-      overflow-x: hidden;
-      overflow-y: hidden;
+      font-family: $font-family-1;
+
+      overflow: hidden;
 
       input {
         display: block;
@@ -36,15 +42,17 @@
         margin: 5px auto;
         padding: 10px;
         font-size: 20px;
+        font-family: inherit;
 
         background-color: inherit;
         color: white;
 
         resize: none;
         outline: none;
-        border: 2px solid white;
+        border: 0px;
+        border-bottom: 2px solid white;
 
-        overflow-x: hidden;
+        overflow-x: auto;
         overflow-y: hidden;
       }
 
@@ -52,9 +60,10 @@
         display: inline-block;
         height: 40px;
         width: 50%;
-        background-color: inherit; // #1e3e3e;
+        background-color: inherit;
         color: white;
-        font-size: 16px;
+        font-size: 17px;
+        font-family: inherit;
 
         margin: 0px;
 
@@ -62,12 +71,7 @@
         outline: none;
         border: 0px;
 
-        overflow-x: hidden;
-        overflow-y: hidden;
-
-        &:hover {
-          color: green;
-        }
+        overflow: hidden;
       }
     }
 }

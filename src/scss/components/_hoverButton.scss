@@ -1,17 +1,25 @@
 #hoverButton {
   width: $hundred-percent;
   margin: 0px;
-  padding: 15px;
+  padding: 10px;
 
   background-color: inherit;
 
   position: absolute;
-  bottom: 5;
+  bottom: 0;
   left: 0;
   right: 0;
 
   overflow: hidden;
-  z-index: 3;
+  z-index: 4;
+
+  text-align: right;
+
+
+  //tablets - small devices only
+  @media (min-width: 768px) {
+    display: none;
+  }
 
   button {
     background-color: $bluish-color;
@@ -27,21 +35,12 @@
     resize: none;
 
     padding: 10px;
-    margin: 10px 0px;
-    width: 15%;
+    margin: 0px;
+    width: 50px;
+    height: 50px;
 
     &:hover {
       cursor: pointer;
     }
-
-    //tablets - small devices only
-    @media (min-width: 768px) {
-      display: none;
-    }
-  }
-
-  //tablets - small devices only
-  @media (min-width: 768px) {
-    display: none;
   }
 }

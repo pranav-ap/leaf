@@ -7,14 +7,14 @@ import Todo from 'Todo';
 
 export class List extends React.Component {
   render() {
-    const { todos } = this.props;
-
-    const sortedTodos = sortTodos(todos);
-
     const renderTodos = () => {
+      const { todos } = this.props;
+
+      const sortedTodos = todos; // sortTodos(todos);
+
       if (sortedTodos.length === 0) {
         return (
-          <p id='empty'>There is nothing to show.</p>
+          <p id='empty'>No tasks left to do.</p>
         );
       }
 
@@ -28,12 +28,13 @@ export class List extends React.Component {
     return (
       <div id='list'>
         {renderTodos()}
+        <div id='dummy'></div>
       </div>
     );
   }
 }
 
-export default connect(state => {
+export default connect((state) => {
   return {
     todos: state.todos
   };

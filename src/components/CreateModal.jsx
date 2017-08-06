@@ -10,10 +10,12 @@ export class CreateModal extends React.Component {
     const text = this.refs.modalText.value;
 
     dispatch(startAddTodo(text));
+    this.refs.modalText.value = '';
     document.getElementById('createModal').style.display = 'none';
   }
 
   handleCancel() {
+    this.refs.modalText.value = '';
     document.getElementById('createModal').style.display = 'none';
   }
 
@@ -23,7 +25,7 @@ export class CreateModal extends React.Component {
         <div className='modal-content'>
           <input type='text' ref='modalText' placeholder='Enter title' autoFocus />
           <button onClick={this.handleCancel.bind(this)}>Cancel</button>
-          <button onClick={this.handleCreate.bind(this)}>Create</button>
+          <button onClick={this.handleCreate.bind(this)}><i className="fa fa-plus" aria-hidden="true" />&nbsp;&nbsp;Create</button>
         </div>
       </div>
     );
