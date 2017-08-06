@@ -35,7 +35,7 @@ export class Start extends React.Component {
           <input type="password" ref="password" placeholder="Password" />
           <div id='button-group'>
             <button id='login' onClick={this.onLogin.bind(this)}>Login</button>
-            <button id='signup' onClick={this.onSignup.bind(this)}>Signup</button>
+            <button id='signup' onClick={this.onSignup.bind(this)}><i className="fa fa-sign-in" aria-hidden="true" />&nbsp;&nbsp;Signup</button>
           </div>
         </div>
       </div>

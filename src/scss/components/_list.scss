@@ -22,6 +22,11 @@
     top: $topbar-height + $addbar-height-tablet;
   }
 
+  // desktops and above - medium and large devices
+  @media (min-width: 992px) {
+    padding: 20px 120px;
+  }
+
   #empty {
     background-color: inherit;
     font-family: inherit;

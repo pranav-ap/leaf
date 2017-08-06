@@ -31,7 +31,7 @@ export class AddBar extends React.Component {
   render() {
     return (
       <div id='addbar'>
-        <input id='addbartext' type='text' ref='addbartext' placeholder='Add more tasks' />
+        <input id='addbartext' type='text' ref='addbartext' placeholder='Add more tasks' autoFocus />
         <button onClick={this.handleCreate.bind(this)}><i className="fa fa-plus" aria-hidden="true" /></button>
       </div>
     );
