@@ -2,21 +2,31 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Topbar from 'Topbar';
-import Main from 'Main';
-import MobileMain from 'MobileMain';
+import List from 'List';
+import AddBar from 'AddBar';
+import Toolbar from 'Toolbar';
+import CreateModal from 'CreateModal';
+//import HoverButton from 'HoverButton';
 
 import { startAddTodos } from 'todosActions';
 
 export class Home extends React.Component {
-  renderMain() {
+  renderAddBar() {
     const { isMobile } = this.props;
 
-    if (isMobile) {
-      return (<MobileMain />);
+    if (!isMobile) {
+      console.log('gggggggggggg');
+      return (<AddBar />);
     }
-
-    return (<Main />);
   }
+
+  // renderHoverButton() {
+  //   const { isMobile } = this.props;
+  // {this.renderHoverButton()}
+  //   if (isMobile) {
+  //     return (<HoverButton />);
+  //   }
+  // }
 
   render() {
     const { dispatch } = this.props;
@@ -25,7 +35,10 @@ export class Home extends React.Component {
     return (
       <div id='home'>
         <Topbar />
-        {this.renderMain()}
+        <CreateModal />
+        {this.renderAddBar()}
+        <List />
+        <Toolbar />
       </div>
     );
   }

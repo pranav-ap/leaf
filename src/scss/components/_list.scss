@@ -20,7 +20,7 @@
   @media (min-width: 768px) {
     padding: 20px 150px;
     bottom: $toolbar-height-tablet;
-    top: $topbar-height-tablet;
+    top: $topbar-height-tablet + $addbar-height-tablet;
   }
 
   #empty {

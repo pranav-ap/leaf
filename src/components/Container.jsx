@@ -1,11 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default class Container extends React.Component {
+import $ from 'jquery';
+
+import { findIfMobile } from 'uiActions';
+
+export class Container extends React.Component {
+  componentWillMount() {
+    const { dispatch } = this.props;
+
+    $(window).resize(() => {
+      dispatch(findIfMobile());
+    });
+
+    dispatch(findIfMobile());
+  }
+
   render() {
     return (
-      <div id='container'>
+      <div id="container">
         {this.props.children}
       </div>
     );
   }
 }
+
+export default connect()(Container);

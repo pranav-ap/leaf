@@ -1,13 +1,12 @@
 import { combineReducers, applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { todosReducer, authReducer, modeReducer } from 'reducers';
+import { todosReducer, authReducer } from 'reducers';
 import { isMobileReducer } from 'uiReducers';
 
 export const configure = (initialState = {}) => {
   const reducer = combineReducers({
     todos: todosReducer,
     auth: authReducer,
-    mode: modeReducer,
     isMobile: isMobileReducer
   });
 

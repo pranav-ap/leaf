@@ -11,20 +11,6 @@ export class Todo extends React.Component {
     dispatch(startDeleteTodo(_id));
   }
 
-  checkModeAndRender() {
-    const { today, mode } = this.props;
-
-    if (mode === 'delete') {
-      return (
-        <button onClick={this.handleDelete.bind(this)}><i className="fa fa-plus" aria-hidden="true" /></button>
-      );
-    }
-
-    return (
-      <input type='checkbox' checked={today} />
-    );
-  }
-
   render() {
     const { dispatch, _id, text, today } = this.props;
     const todoClassName = today ? 'todo todo-today' : 'todo';
@@ -42,6 +28,6 @@ export class Todo extends React.Component {
 
 export default connect((state) => {
   return {
-    mode: state.mode
+    isMobile: state.isMobile
   };
 })(Todo);

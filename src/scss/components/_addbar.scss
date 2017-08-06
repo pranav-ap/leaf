@@ -1,0 +1,83 @@
+#addBar {
+  display: none;
+
+  //tablets - small devices only
+  @media (min-width: 768px) {
+    width: $hundred-percent;
+    height: $addbar-height-tablet;
+    margin: 0px;
+    padding: 15px;
+
+    display: block;
+
+    background-color: inherit;
+
+    position: absolute;
+    top: $topbar-height-tablet;
+    left: 0;
+    right: 0;
+
+    overflow: hidden;
+    z-index: 3;
+
+    input {
+      background-color: inherit;
+      color: white;
+      font-family: inherit;
+
+      display: inline-block;
+
+      font-size: $login-input-font-size;
+
+      padding: 11px;
+      margin: 8px 0px;
+      width: 80%;
+
+      outline: none;
+      border: 0px;
+      border-bottom: 1px solid $bluish-color;
+
+      //tablets - small devices only
+      @media (min-width: 768px) {
+        font-size: $login-input-font-size-tablet;
+      }
+
+      // desktops and above - medium and large devices
+      @media (min-width: 992px) {
+        font-size: $login-input-font-size-desktop;
+      }
+    }
+
+    button {
+      background-color: $bluish-color;
+      color: white;
+      font-family: $font-family-1;
+
+      display: inline-block;
+
+      font-size: $login-button-font-size;
+
+      outline: none;
+      border: 0px;
+      resize: none;
+
+      padding: 10px;
+      margin: 10px 0px;
+      width: 15%;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      //tablets - small devices only
+      @media (min-width: 768px) {
+        font-size: $login-button-font-size-tablet;
+      }
+
+      // desktops and above - medium and large devices
+      @media (min-width: 992px) {
+        font-size: $login-button-font-size-desktop;
+      }
+    }
+  }
+}
