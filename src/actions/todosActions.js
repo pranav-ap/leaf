@@ -87,7 +87,7 @@ export const startUpdateTodo = (_id, text, today) => {
     };
 
     return axios.patch(`/api/todos/${_id}`, { text, today }, { headers }).then((res) => {
-      dispatch(updateTodo(res.data));
+      dispatch(updateTodo(_id, res.data.todo));
     }).catch(() => {
 
     });
