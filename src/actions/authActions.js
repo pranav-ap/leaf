@@ -73,19 +73,19 @@ export const startLogout = () => {
     });
   };
 };
-//
-// export const checkIfLoggedIn = () => {
-//   return () => {
-//     const headers = {
-//       'x-auth': localStorage.getItem('x-auth')
-//     };
-//
-//     return axios.get('/api/users/me', { headers }).then(() => {
-//       browserHistory.push('/home');
-//       //return true;
-//     }).catch(() => {
-//       browserHistory.push('/');
-//       //return false;
-//     });
-//   };
-// };
+
+export const checkIfLoggedIn = () => {
+  return () => {
+    const headers = {
+      'x-auth': localStorage.getItem('x-auth')
+    };
+
+    return axios.get('/api/users/me', { headers }).then(() => {
+      browserHistory.push('/home');
+      //return true;
+    }).catch(() => {
+      browserHistory.push('/');
+      //return false;
+    });
+  };
+};

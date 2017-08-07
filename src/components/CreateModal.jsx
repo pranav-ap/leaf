@@ -5,11 +5,11 @@ import $ from 'jquery';
 import { startAddTodo } from 'todosActions';
 
 export class CreateModal extends React.Component {
-  componentWillMount() {
-    $(':not(#modal-content)').on('click', () => {
-      document.getElementById('createModal').style.display = 'none';
-    });
-  }
+  // componentWillMount() {
+  //   $(':not(#modal-content)').on('click', () => {
+  //     document.getElementById('createModal').style.display = 'none';
+  //   });
+  // }
 
   handleCreate(e) {
     e.preventDefault();

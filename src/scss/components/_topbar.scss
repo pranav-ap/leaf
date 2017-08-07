@@ -23,7 +23,7 @@
   }
 
   p {
-    width: 70%;
+    width: 65%;
 
     padding: 0px;
     margin: 0px;
@@ -40,7 +40,7 @@
   }
 
   #dropdown-button {
-    width: 30%;
+    width: 35%;
     padding: 0px;
     margin: 0px;
 
@@ -59,7 +59,8 @@
     text-align: right;
 
     &:hover {
-      color: white;
+      color: $bluish-color;
+      cursor: pointer;
     }
 
     //tablets - small devices only
