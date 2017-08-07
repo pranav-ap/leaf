@@ -1,12 +1,12 @@
 {
   "test": {
     "PORT": 3000,
-    "MONGODB_URI": "mongodb://localhost:27017/KrakenDBTest",
+    "MONGODB_URI": "mongodb://localhost:27017/LeafDBTest",
     "JWT_SECRET": "sfrwtgerwgriyua234wz"
   },
   "development": {
     "PORT": 3000,
-    "MONGODB_URI": "mongodb://localhost:27017/KrakenDB",
+    "MONGODB_URI": "mongodb://localhost:27017/LeafDB",
     "JWT_SECRET": "oiiexnubil6778nwrrghh"
   }
 }
