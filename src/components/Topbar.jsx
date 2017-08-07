@@ -32,10 +32,9 @@ export class Topbar extends React.Component {
     return (
       <div id='topbar'>
         <p><i className="fa fa-leaf" aria-hidden="true" />&nbsp;&nbsp;Leaf</p>
-        <button id="dropdown-button" onClick={this.handleDropdown.bind(this)}>Settings&nbsp;&nbsp;<i className="fa fa-caret-down" aria-hidden="true" /></button>
+        <button id="dropdown-button" onClick={this.handleDropdown.bind(this)}><i className="fa fa-cog" aria-hidden="true" />&nbsp;&nbsp;Settings&nbsp;&nbsp;<i className="fa fa-caret-down" aria-hidden="true" /></button>
         <div id='dropdown-content'>
           <button id='logout' onClick={this.onLogout.bind(this)}><i className="fa fa-sign-out" aria-hidden="true" />&nbsp;&nbsp;Logout</button>
-          <button id='logout2' onClick={this.onLogout.bind(this)}><i className="fa fa-sign-out" aria-hidden="true" />&nbsp;&nbsp;Logout</button>
         </div>
       </div>
     );

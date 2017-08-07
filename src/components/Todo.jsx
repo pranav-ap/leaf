@@ -18,21 +18,28 @@ export class Todo extends React.Component {
     dispatch(startUpdateTodo(_id, text, !today));
   }
 
+  renderTrash() {
+    const { today } = this.props;
+
+    if (today) {
+      return (
+        <button className='trashButton' onClick={this.handleDelete.bind(this)}><i className="fa fa-trash" aria-hidden="true" /></button>
+      );
+    }
+  }
+
   render() {
     const { text, today } = this.props;
     const todoClassName = today ? 'todo todo-today' : 'todo';
 
     return (
       <div className={todoClassName}>
+        <input type="checkbox" className='checkbox' value={today} checked={today} onChange={this.handleUpdate.bind(this)} />
         <p className='message'>{text}</p>
-        <input type="checkbox" className='checkbox' value={today} onChange={this.handleUpdate.bind(this)} />
+        {this.renderTrash()}
       </div>
     );
   }
 }
 
-export default connect((state) => {
-  return {
-    isMobile: state.isMobile
-  };
-})(Todo);
+export default connect()(Todo);

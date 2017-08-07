@@ -8,9 +8,7 @@ export const todosReducer = (state = [], action) => {
     case 'UPDATE_TODO':
       return state.map((todo) => {
         if (todo._id === action._id) {
-          return {
-            ...action.todo
-          };
+          return action.todo
         }
         return todo;
       });
