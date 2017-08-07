@@ -14,6 +14,12 @@ const { authenticate } = require('./middleware/authenticate');
 const app = express();
 const port = process.env.PORT;
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 // change https to http req.headers[] doesn't exist locally
 app.use((req, res, next) => {
   if (req.headers['x-forwarded-proto'] === 'https') {
