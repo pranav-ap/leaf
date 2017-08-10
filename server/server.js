@@ -20,15 +20,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// change https to http req.headers[] doesn't exist locally
-app.use((req, res, next) => {
-  if (req.headers['x-forwarded-proto'] === 'https') {
-    res.redirect(`http://${req.hostname}${req.url}`);
-  } else {
-    next();
-  }
-});
-
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(bodyParser.json());
 
