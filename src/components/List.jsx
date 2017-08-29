@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { sortTodos } from 'sortTodos'
+import { sortTodos } from 'sortTodos';
 
 import Todo from 'Todo';
 
